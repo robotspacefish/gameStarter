@@ -37,7 +37,7 @@ export default class Game {
   }
 
   update() {
-    this.player.update();
+    this.player.update(this.width, this.height);
   }
 
   resize() {
