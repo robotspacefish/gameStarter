@@ -16,6 +16,10 @@ function keyHandler(e) {
   if (e.keyCode === 32) console.log(game)
 }
 
+window.addEventListener('load', () => {
+  game = new Game(document.getElementById('canvas').getContext('2d'));
+}, false);
+
 window.addEventListener('resize', () => {
   game.resize();
 }, false);
