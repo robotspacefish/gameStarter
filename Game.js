@@ -5,7 +5,7 @@ export default class Game {
     this._ctx = ctx;
     this.player = new Player(10, 10);
     this.RAF;
-    this.loopCount = 0;
+
     this.loop();
   }
 
