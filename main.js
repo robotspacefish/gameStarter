@@ -1,6 +1,6 @@
 import Game from './Game.js';
 
-const game = new Game(document.getElementById('canvas').getContext('2d'));
+let game;
 
 function keyHandler(e) {
   const keyState = e.type === 'keydown';
@@ -16,5 +16,8 @@ function keyHandler(e) {
   if (e.keyCode === 32) console.log(game)
 }
 
+window.addEventListener('resize', () => {
+  game.resize();
+}, false);
 window.addEventListener('keydown', keyHandler);
 window.addEventListener('keyup', keyHandler);

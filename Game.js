@@ -6,6 +6,16 @@ export default class Game {
     this.player = new Player(10, 10);
     this.RAF;
 
+    // logical
+    this.width = 800;
+    this.height = 600;
+    this.maxWidth = this.width;
+    this.maxHeight = this.height;
+
+    // visual
+    this.ctx.canvas.width = this.width;
+    this.ctx.canvas.height = this.height;
+
     this.loop();
   }
 
@@ -14,9 +24,10 @@ export default class Game {
   }
 
   loop() {
+    console.log('looping')
     this.draw();
     this.update();
-    requestAnimationFrame(this.loop.bind(this));
+    this.RAF = requestAnimationFrame(this.loop.bind(this));
   }
 
   draw() {
@@ -33,22 +44,19 @@ export default class Game {
       cHeight = window.innerHeight;
 
     const nativeRatio = this.width / this.height,
-      browserWindowRatio = cWidth / cHeight,
-      SIZE = 16;
+      browserWindowRatio = cWidth / cHeight;
 
     if (browserWindowRatio > nativeRatio) {
-      cHeight = Math.floor(cHeight * 0.9 * SIZE) * SIZE;
-      if (cHeight > this.maxWidth) cHeight = this.maxHeight;
+      cHeight = Math.floor(cHeight * 0.9);
       cWidth = Math.floor(cHeight * nativeRatio);
     } else {
-      cWidth = Math.floor(cWidth * 0.9 / SIZE) * SIZE;
-      if (cWidth > this.maxWidth) cWidth = this.maxWidth;
-      cHeight = Math.floor(cWidth / nativeRatio);
+      cWidth = Math.floor(cWidth * 0.9);
+      cHeight = Math.floor(cWidth / nativeRatio)
     }
 
-    this.canvas.style.width = `${cWidth}px`;
-    this.canvas.style.height = `${cHeight}px`;
+    this.ctx.canvas.style.width = `${cWidth}px`;
+    this.ctx.canvas.style.height = `${cHeight}px`;
 
-    this.ctx.imageSmoothingEnabled = false; // remove blurring from resizing
+    this.ctx.enableImageSmoothing = false;
   }
 }
