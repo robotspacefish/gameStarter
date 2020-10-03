@@ -1,14 +1,14 @@
 import Player from './Player.js';
 
 export default class Game {
-  constructor(ctx) {
+  constructor(ctx, width = 800, height = 600) {
     this._ctx = ctx;
     this.player = new Player(10, 10);
     this.RAF;
 
     // logical
-    this.width = 800;
-    this.height = 600;
+    this.width = width;
+    this.height = height;
     this.maxWidth = this.width;
     this.maxHeight = this.height;
 
@@ -16,6 +16,7 @@ export default class Game {
     this.ctx.canvas.width = this.width;
     this.ctx.canvas.height = this.height;
 
+    this.resize();
     this.loop();
   }
 
@@ -32,7 +33,7 @@ export default class Game {
 
   draw() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.player.draw(this.ctx);
+    this.player.draw(this.ctx, this.width, this.height);
   }
 
   update() {
